@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رؤية - منصة التخطيط الاستراتيجي لإدارة الموارد البشرية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121420;
+            --card-bg: #1a1d2e;
+            --primary-purple: #6c5ce7;
+            --accent-blue: #00cec9;
+            --danger-red: #ff7675;
+            --text-white: #ffffff;
+            --text-muted: #a4b0be;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .rooya-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .card-panel {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            flex: 1;
+            min-width: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            color: var(--text-muted);
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .custom-input, .custom-select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .custom-input:focus, .custom-select:focus {
+            border-color: var(--primary-purple);
+            outline: none;
+            box-shadow: 0 0 8px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-purple);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: 0.3s;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            background: rgba(0, 206, 201, 0.05);
+            border: 1px dashed var(--accent-blue);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .result-box span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        #financialImpact {
+            color: var(--accent-blue);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .status-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .status-box span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        .status-badge.secure {
+            background: rgba(0, 206, 201, 0.2);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .status-badge.danger {
+            background: rgba(255, 118, 117, 0.2);
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .progress-container span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        #progressText {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.1);
+            height: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--accent-blue), var(--primary-purple));
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .rooya-container {
+                flex-direction: column;
+            }
+
+            .card-panel {
+                min-width: 100%;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rooya-container">
+        <!-- لوحة الإعدادات يميناً -->
+        <div class="card-panel">
+            <h3>⚙️ إعدادات الحالة التقديرية الجديدة</h3>
+
+            <label>1. الميزانية السنوية المتاحة (دج):</label>
+            <input type="number" id="totalBudget" value="3200000" class="custom-input">
+
+            <label>2. طبيعة الإجراء المطلوب دراسته:</label>
+            <select id="actionType" class="custom-select">
+                <option value="external">فتح مسابقة توظيف خارجي (منصب شاغر)</option>
+                <option value="promotion">ترقية استباقية لموظف في الرتبة أو الدرجة</option>
+                <option value="contract">توظيف عن طريق التعاقد</option>
+            </select>
+
+            <label>3. السلك أو الرتبة المستهدفة:</label>
+            <select id="rankType" class="custom-select">
+                <option value="12" data-salary="55000">متصرف (صنف 12)</option>
+                <option value="14" data-salary="75000">متصرف رئيسي (صنف 14)</option>
+                <option value="10" data-salary="45000">تقني سامي (صنف 10)</option>
+                <option value="07" data-salary="38000">مساعد متصرف (صنف 07)</option>
+            </select>
+
+            <label>4. عدد المناصب المالية المراد تعديلها:</label>
+            <input type="number" id="positionsCount" value="1" min="1" class="custom-input">
+
+            <button id="calcBtn" class="btn-primary">⚡ بدء حساب الأثر المالي الفوري</button>
+        </div>
+
+        <!-- لوحة النتائج يساراً -->
+        <div class="card-panel">
+            <h3>📊 نتائج التدقيق والمطابقة التلقائية مع الميزانية</h3>
+
+            <div class="result-box">
+                <span>الأثر المالي السنوي المتوقع (التكلفة الإضافية):</span>
+                <h2 id="financialImpact">00.00 دج</h2>
+            </div>
+
+            <div class="status-box">
+                <span>حالة التغطية المالية في الميزانية الحالية:</span>
+                <div id="coverageStatus" class="status-badge secure">مستقرة وجاهزة ✓</div>
+            </div>
+
+            <div class="progress-container">
+                <span>معدل استهلاك الاعتمادات المالية السنوية للأجور:</span>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-bar-fill" style="width: 72%;"></div>
+                </div>
+                <span id="progressText">72%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calcBtn').addEventListener('click', function() {
+            // جلب القيم المدخلة يدوياً
+            const totalBudget = parseFloat(document.getElementById('totalBudget').value) || 0;
+            const positions = parseInt(document.getElementById('positionsCount').value) || 0;
+
+            const rankSelect = document.getElementById('rankType');
+            const selectedRankSalary = parseFloat(rankSelect.options[rankSelect.selectedIndex].getAttribute('data-salary'));
+
+            // حساب الأثر المالي السنوي التقريبي للمناصب الجديدة (الراتب * 12 شهر * عدد المناصب)
+            const annualImpact = selectedRankSalary * 12 * positions;
+
+            // تحديث نص الأثر المالي في الواجهة
+            document.getElementById('financialImpact').innerText = `${annualImpact.toLocaleString('ar-SA')} دج / سنوياً`;
+
+            // محاكاة نسبة الاستهلاك الحالية (افترضنا أن المؤسسة مستهلكة مسبقاً لـ 70% من ميزانيتها)
+            const baseExpenses = totalBudget * 0.70;
+            const totalNewExpenses = baseExpenses + annualImpact;
+            let usagePercentage = (totalNewExpenses / totalBudget) * 100;
+            if(usagePercentage > 100) usagePercentage = 100;
+
+            // تحديث شريط التقدم والنسبة المئوية
+            document.getElementById('progressBar').style.width = `${usagePercentage.toFixed(0)}%`;
+            document.getElementById('progressText').innerText = `${usagePercentage.toFixed(0)}%`;
+
+            // فحص توافق الميزانية وتحديث التنبيه
+            const statusBadge = document.getElementById('coverageStatus');
+            if (totalNewExpenses > totalBudget) {
+                statusBadge.innerText = "تنبيه: يتطلب موافقة المراقب المالي ⚠️";
+                statusBadge.className = "status-badge danger";
+            } else {
+                statusBadge.innerText = "مستقرة وجاهزة وعادلة ✓";
+                statusBadge.className = "status-badge secure";
+            }
+        });
+    </script>
+</body>
+</html>
